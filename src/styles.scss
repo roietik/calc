@@ -4,15 +4,43 @@
   box-sizing: border-box;
 }
 
-body {
-  height: 100%;
-  background: rgb(170, 86, 208);
-  background: linear-gradient(
+:root {
+  --body-bg: linear-gradient(
       135deg,
       rgba(170, 86, 208, 1) 0%,
       rgba(255, 139, 96, 1) 100%
     )
     fixed;
+  --num-bg: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(244, 244, 244, 1) 100%
+  );
+  --num-bg-hover: linear-gradient(
+    135deg,
+    rgba(244, 244, 244, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  --oper-bg: linear-gradient(
+    135deg,
+    rgba(156, 77, 224, 1) 0%,
+    rgba(142, 62, 205, 1) 100%
+  );
+  --oper-bg-hover: linear-gradient(
+    135deg,
+    rgba(142, 62, 205, 1) 0%,
+    rgba(156, 77, 224, 1) 100%
+  );
+  --pink: #f90080;
+  --pink-light: #a67a7d;
+  --pink-dark: #ea0179;
+  --white: #ffffff;
+  --black: #212121;
+}
+
+body {
+  height: 100%;
+  background: var(--body-bg);
   .container {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -25,6 +53,72 @@ body {
     top: 50%;
     transform: translateY(15%);
     font-size: 12px;
+    #calc-display {
+      width: 100%;
+      height: 100%;
+      background-color: var(--black);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      font-family: "Lato", sans-serif;
+      font-weight: 300;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      overflow: hidden;
+      #dis,
+      #eq {
+        padding-right: 10%;
+      }
+
+      #dis {
+        font-size: 68px;
+      }
+      #eq {
+        font-size: 26px;
+        color: var(--pink-light);
+      }
+    }
+    button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      display: inline-block;
+      margin: 0;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      cursor: grab;
+      font-size: 2.5em;
+      &:focus {
+        outline: 0;
+      }
+    }
+    .num {
+      background: var(--num-bg);
+      &:hover {
+        background: var(--num-bg-hover);
+      }
+    }
+    .oper {
+      background: var(--oper-bg);
+      &:hover {
+        background: var(--oper-bg-hover);
+      }
+      color: var(--white);
+    }
+    .equal {
+      background: var(--pink);
+      &:hover {
+        background: var(--pink-dark);
+      }
+      color: var(--white);
+      border-bottom-right-radius: 8px;
+    }
+    button#zero {
+      border-bottom-left-radius: 8px;
+    }
   }
 }
 
@@ -46,7 +140,6 @@ body {
 .col-1-4 {
   grid-column: 2 / 6;
 }
-/* Grid Classes - Rows */
 .row-1 {
   grid-row: 2 / 3;
 }
@@ -71,102 +164,3 @@ body {
 .row-1-2 {
   grid-row: 2 / 4;
 }
-
-#calc-display {
-  width: 100%;
-  height: 100%;
-  background-color: #212121;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  font-family: "Lato", sans-serif;
-  font-weight: 300;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  overflow: hidden;
-}
-#dis,
-#eq {
-  padding-right: 10%;
-}
-
-#dis {
-  font-size: 68px;
-}
-#eq {
-  font-size: 26px;
-  color: #a67a7d;
-}
-
-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  display: inline-block;
-  margin: 0;
-  text-align: center;
-  text-decoration: none;
-  border: none;
-  cursor: grab;
-  font-size: 2.5em;
-}
-
-button:focus {
-  outline: 0;
-}
-.num {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(244, 244, 244, 1) 100%
-  );
-  &:hover {
-    background: linear-gradient(
-      135deg,
-      rgba(244, 244, 244, 1) 0%,
-      rgba(255, 255, 255, 1) 100%
-    );
-  }
-}
-.oper {
-  background: linear-gradient(
-    135deg,
-    rgba(156, 77, 224, 1) 0%,
-    rgba(142, 62, 205, 1) 100%
-  );
-  &:hover {
-    background: linear-gradient(
-      135deg,
-      rgba(142, 62, 205, 1) 0%,
-      rgba(156, 77, 224, 1) 100%
-    );
-  }
-  color: #fff;
-}
-.equal {
-  background: #f90080;
-  &:hover {
-    background: darken(#f90080, 2%);
-  }
-  color: #fff;
-  border-bottom-right-radius: 8px;
-}
-button#zero {
-  border-bottom-left-radius: 8px;
-}
-
-/* Responsive for Small Screens */
-/* @media only screen and (max-width: 767px) { */
-// .container {
-//   grid-template-columns: 6% repeat(4, 22%) 6%;
-//   grid-template-rows: 5% 5% 20% repeat(5, 13%) 5%;
-// }
-// #dis {
-//   font-size: 12vw;
-// }
-// #eq {
-//   font-size: 4vw;
-// }
-/* } */
