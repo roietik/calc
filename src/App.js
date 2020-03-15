@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Button from "./components/Button";
+import Display from "./components/Display";
 import "./styles.scss";
 
 /* eslint no-eval: 0 */
@@ -289,37 +291,5 @@ class App extends Component {
     );
   }
 }
-const equationLimit = str => {
-  let res = String(str).match(/(.{20})\s*$/g) || str;
-  return res;
-};
-
-const displayLimit = str => {
-  let res = String(str).match(/(.{8})\s*$/g) || str;
-  return res;
-};
-
-const Display = props => (
-  <div id="calc-display" className="row-1-2 col-1-4">
-    <span id="eq">
-      {props.equation <= 20 ? props.equation : equationLimit(props.equation)}
-    </span>
-    <span id="dis">
-      {props.display <= 8 ? props.display : displayLimit(props.display)}
-    </span>
-  </div>
-);
-
-const Button = props => (
-  <button
-    type="button"
-    id={props.id}
-    value={props.value}
-    className={props.class}
-    onClick={props.click}
-  >
-    {props.display}
-  </button>
-);
 
 export default App;
